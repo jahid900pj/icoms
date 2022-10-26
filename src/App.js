@@ -8,6 +8,8 @@ import FAQ from './component/FAQ/FAQ';
 import Blog from './component/Blog/Blog';
 import DetailCourses from './component/DetailCourses/DetailCourses';
 import Premium from './component/Premium/Premium';
+import Login from './component/Form/Login/Login';
+import SignUp from './component/Form/SignUp/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/blog', element: <Blog></Blog>
+      },
+      {
+        path: '/login', element: <Login></Login>
+      },
+      {
+        path: '/signup', element: <SignUp></SignUp>
       }
     ]
   }
