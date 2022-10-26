@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CoursesName.css'
 
-const CoursesName = ({ name }) => {
+const CoursesName = ({ name, id }) => {
     return (
         <div>
-            <Link className='Cname '>{name}</Link>
+            <Link className='Cname ' to={`/coursesDetail/${id}`}>{name}</Link>
         </div>
     );
 };

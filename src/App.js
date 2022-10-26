@@ -6,6 +6,7 @@ import Home from './component/Home/Home';
 import Courses from './component/Courses/Courses';
 import FAQ from './component/FAQ/FAQ';
 import Blog from './component/Blog/Blog';
+import DetailCourses from './component/DetailCourses/DetailCourses';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,13 @@ const router = createBrowserRouter([
         path: '/courses', element: <Courses></Courses>,
         loader: () => {
           return fetch('http://localhost:5000/allCourses')
+        }
+      },
+      {
+        path: '/coursesDetail/:id',
+        element: <DetailCourses></DetailCourses>,
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/coursesDetail/${params.id}`)
         }
       },
       {
