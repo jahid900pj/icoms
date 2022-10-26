@@ -3,10 +3,11 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaUser, FaGripfire } from "react-icons/fa";
 
 const ViewCourses = ({ singleCourses }) => {
-    // console.log(singleCourses)
-    const { image_url, title, details, price, _id } = singleCourses;
+    console.log(singleCourses)
+    const { image_url, title, details, price, _id, author } = singleCourses;
 
     return (
         <Col>
@@ -20,6 +21,7 @@ const ViewCourses = ({ singleCourses }) => {
                             details.length > 100 ? <p>{details.slice(0, 100)}...</p> : details
 
                         }
+                        <p className='d-flex align-items-center'> <FaUser className='me-2'></FaUser>  {author.name}</p>
                     </Card.Text>
                     <div className='d-flex  justify-content-between'>
                         <h4>$ {price}</h4>

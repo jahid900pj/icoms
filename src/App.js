@@ -7,6 +7,7 @@ import Courses from './component/Courses/Courses';
 import FAQ from './component/FAQ/FAQ';
 import Blog from './component/Blog/Blog';
 import DetailCourses from './component/DetailCourses/DetailCourses';
+import Premium from './component/Premium/Premium';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,13 @@ const router = createBrowserRouter([
         element: <DetailCourses></DetailCourses>,
         loader: ({ params }) => {
           return fetch(`http://localhost:5000/coursesDetail/${params.id}`)
+        }
+      },
+      {
+        path: '/premium/:id',
+        element: <Premium></Premium>,
+        loader: ({ params }) => {
+          return fetch(`http://localhost:5000/premium/${params.id}`)
         }
       },
       {
