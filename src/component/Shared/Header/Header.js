@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { Button } from 'react-bootstrap';
 import { FaUser } from "react-icons/fa";
+import Toggle from '../../Toggle/Toggle';
 
 const Header = () => {
     const { logOut, user } = useContext(AuthContext)
@@ -38,6 +39,9 @@ const Header = () => {
                         <Link to='/faq'>FAQ</Link>
                         <Link to='/blog'>Blog</Link>
 
+                    </Nav>
+                    <Nav className='h-link me-4'>
+                        <Toggle></Toggle>
                     </Nav>
                     <Nav className='h-link me-4'>
                         {
