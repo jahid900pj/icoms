@@ -11,6 +11,7 @@ import Premium from './component/Premium/Premium';
 import Login from './component/Form/Login/Login';
 import SignUp from './component/Form/SignUp/SignUp';
 import PrivateRouter from './Router/PrivateRouter';
+import NotFound from './component/NotFound/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,9 @@ const router = createBrowserRouter([
       },
       {
         path: '/signup', element: <SignUp></SignUp>
+      },
+      {
+        path: '/notFound', element: <NotFound></NotFound>
       }
     ]
   }
