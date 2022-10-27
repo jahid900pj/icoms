@@ -5,6 +5,7 @@ import { FaGripfire } from "react-icons/fa";
 
 const Home = () => {
     {/* https://blinkapp.vercel.app/courses  */ }
+    // https://assignment-ten-2c58d.web.app
     return (
         <div className='container'>
             <div style={{ border: 'none' }} className="card mb-5 ">
