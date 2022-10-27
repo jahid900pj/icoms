@@ -21,21 +21,21 @@ const router = createBrowserRouter([
       {
         path: '/courses', element: <Courses></Courses>,
         loader: () => {
-          return fetch('http://localhost:5000/allCourses')
+          return fetch('https://assigment-ten-server.vercel.app/allCourses')
         }
       },
       {
         path: '/coursesDetail/:id',
         element: <DetailCourses></DetailCourses>,
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/coursesDetail/${params.id}`)
+          return fetch(`https://assigment-ten-server.vercel.app/coursesDetail/${params.id}`)
         }
       },
       {
         path: '/premium/:id',
         element: <PrivateRouter> <Premium></Premium></PrivateRouter>,
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/premium/${params.id}`)
+          return fetch(`https://assigment-ten-server.vercel.app/premium/${params.id}`)
         }
       },
       {

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
+import SocialAccounts from '../../SocialAccounts/SocialAccounts';
 
 const SignUp = () => {
     const [userInfo, setUserInfo] = useState({
@@ -127,7 +128,7 @@ const SignUp = () => {
                         Register
                     </Button>
                     <p className='text-center hr-line'> <span>Login with social accounts</span> </p>
-
+                    <SocialAccounts></SocialAccounts>
                     <p className='text-center'>Already have an account?
                         <Link to='/login'> Sign in</Link>
                     </p>
