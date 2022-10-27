@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const SignUp = () => {
@@ -13,7 +14,11 @@ const SignUp = () => {
         email: "", password: "", general: ""
     })
 
-    const { createUser } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+
+    const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -28,8 +33,9 @@ const SignUp = () => {
                 const user = userCredential.user;
                 console.log(user)
                 form.reset()
-                // setError('')
-                // // navigate('/')
+                handleUpdateUserProfile(name, photoURL)
+                setError('')
+                navigate(location?.state?.from?.pathname)
                 // handleUpdateUserProfile(name, photoURL);
                 // handleEmailVerify();
                 // toast.success('verify your email')
@@ -70,6 +76,16 @@ const SignUp = () => {
 
     }
 
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+
     return (
         <div className='container'>
             <div>
@@ -107,9 +123,14 @@ const SignUp = () => {
                     <Form.Text className="text-danger">
                         {errors.general && <p className="text-danger">{errors.general}</p>}
                     </Form.Text>
-                    <Button variant="primary" type="submit" >
+                    <Button className='mb-3' variant="primary" type="submit" >
                         Register
                     </Button>
+                    <p className='text-center hr-line'> <span>Login with social accounts</span> </p>
+
+                    <p className='text-center'>Already have an account?
+                        <Link to='/login'> Sign in</Link>
+                    </p>
                 </Form>
             </div>
         </div>

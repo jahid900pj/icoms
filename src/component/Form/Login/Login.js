@@ -1,10 +1,12 @@
 import React from 'react';
+import './Login.css'
 import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
+import SocialAccounts from '../../SocialAccounts/SocialAccounts';
 
 const Login = () => {
     const [userInfo, setUserInfo] = useState({
@@ -98,10 +100,18 @@ const Login = () => {
                     </Form.Text>
 
 
-                    <Button variant="primary" type="submit">
+                    <Button className='mb-3' variant="primary" type="submit">
                         Login
                     </Button>
+                    <p className='text-center hr-line'> <span>Login with social accounts</span> </p>
+                    <SocialAccounts></SocialAccounts>
+                    <p className='text-center'>Don't have an account?
+                        <Link to='/signup'> Sign up</Link>
+                    </p>
+
                 </Form>
+
+
             </div>
         </div>
     );

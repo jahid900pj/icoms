@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider';
 import { Button } from 'react-bootstrap';
+import { FaUser } from "react-icons/fa";
 
 const Header = () => {
     const { logOut, user } = useContext(AuthContext)
@@ -38,12 +39,12 @@ const Header = () => {
                         <Link to='/blog'>Blog</Link>
 
                     </Nav>
-                    <Nav className='h-link'>
+                    <Nav className='h-link me-4'>
                         {
                             user?.uid ? <>
-                                <span> {user?.displayName}</span>
 
-                                <Button variant="light" onClick={handleSignOut}>Logout</Button>
+
+                                <Button variant="outline-primary" onClick={handleSignOut}>Logout</Button>
                             </> :
                                 <>
                                     <Link to='/login'>Login</Link>
@@ -51,6 +52,14 @@ const Header = () => {
                                 </>
                         }
                     </Nav>
+
+                    {
+                        user && <Nav className='h-link'>
+                            {
+                                user?.photoURL ? <img style={{ height: '40px', borderRadius: '100%', width: '40px' }} src={user?.photoURL} alt='' title={user.displayName} /> : <FaUser></FaUser>
+                            }
+                        </Nav>
+                    }
                 </Navbar.Collapse>
             </Container>
         </Navbar>
