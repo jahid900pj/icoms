@@ -5,8 +5,23 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/icoms_logo_blue.png'
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthProvider';
+import { Button } from 'react-bootstrap';
 
 const Header = () => {
+    const { logOut, user } = useContext(AuthContext)
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+
+            })
+            .catch(() => {
+
+            })
+    }
+
     return (
         <Navbar className='shadow-lg p-3 mb-5 bg-body' collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>
@@ -24,8 +39,17 @@ const Header = () => {
 
                     </Nav>
                     <Nav className='h-link'>
-                        <Link to='/login'>Login</Link>
-                        <Link to='/signup'>Sign Up</Link>
+                        {
+                            user?.uid ? <>
+                                <span> {user?.displayName}</span>
+
+                                <Button variant="light" onClick={handleSignOut}>Logout</Button>
+                            </> :
+                                <>
+                                    <Link to='/login'>Login</Link>
+                                    <Link to='/signup'>Register</Link>
+                                </>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>

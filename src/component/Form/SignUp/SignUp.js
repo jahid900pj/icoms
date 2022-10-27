@@ -1,41 +1,114 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const SignUp = () => {
+    const [userInfo, setUserInfo] = useState({
+        email: "", password: ""
+    });
+
+    const [errors, setError] = useState({
+        email: "", password: "", general: ""
+    })
+
+    const { createUser } = useContext(AuthContext)
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
+        // const email = form.email.value;
+        // const password = form.password.value;
+        console.log(name, photoURL)
+        createUser(userInfo.email, userInfo.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+                form.reset()
+                // setError('')
+                // // navigate('/')
+                // handleUpdateUserProfile(name, photoURL);
+                // handleEmailVerify();
+                // toast.success('verify your email')
+            })
+            .catch((error) => {
+                console.error('new user ', error)
+                setError({ ...errors, general: error.message })
+            })
+
+    }
+
+
+    const handleEmailChange = (e) => {
+        console.log(e.target.value)
+        const email = e.target.value;
+        if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+            setError({ ...errors, email: 'Place provide a valid email' })
+            setUserInfo({ ...userInfo, email: e.target.value })
+        }
+        else {
+            setError({ ...errors, email: '' })
+            setUserInfo({ ...userInfo, email: e.target.value })
+        }
+
+    }
+
+    const handlePasswordChange = (e) => {
+        const password = e.target.value;
+        if (password.length < 6) {
+            setError({ ...errors, password: 'Password must be 6 characters' })
+            setUserInfo({ ...userInfo, password: e.target.value })
+        }
+        else {
+            setError({ ...errors, password: '' })
+            setUserInfo({ ...userInfo, password: e.target.value })
+        }
+
+
+    }
+
     return (
         <div className='container'>
             <div>
-                <Form style={{ maxWidth: '400px', background: '#adb5bd', boxShadow: '10px 10px 50px 5px #adb5bd' }} className='w-100 mx-auto ps-3 pe-3 pb-5 pt-4 rounded '>
+                <Form onSubmit={handleSubmit} style={{ maxWidth: '400px', background: '#adb5bd', boxShadow: '10px 10px 50px 5px #adb5bd' }} className='w-100 mx-auto ps-3 pe-3 pb-5 pt-4 rounded '>
                     <h1 className='text-center'>Sign Up</h1>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email Name</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
+                        <Form.Label>Your Name</Form.Label>
+                        <Form.Control type="text" name='name' placeholder="Enter Name" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label> Photo URL</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
+                        <Form.Label>photo URL</Form.Label>
+                        <Form.Control type="text" name='photoURL' placeholder="photo URL" />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
+                        <Form.Control type="email" name='email' placeholder="Enter email" onChange={handleEmailChange}
+                            required />
+                        <Form.Text className="text-danger">
+                            {errors.email && <p className="text-danger">{errors.email}</p>}
                         </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" name='password' placeholder="Password" onChange={handlePasswordChange}
+                            required />
+                        <Form.Text className="text-danger">
+                            {errors.password && <p className="text-danger">{errors.password}</p>}
+                        </Form.Text>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
+
+                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
+
+                    </Form.Group>
+                    <Form.Text className="text-danger">
+                        {errors.general && <p className="text-danger">{errors.general}</p>}
+                    </Form.Text>
+                    <Button variant="primary" type="submit" >
+                        Register
                     </Button>
                 </Form>
             </div>

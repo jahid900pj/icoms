@@ -10,6 +10,7 @@ import DetailCourses from './component/DetailCourses/DetailCourses';
 import Premium from './component/Premium/Premium';
 import Login from './component/Form/Login/Login';
 import SignUp from './component/Form/SignUp/SignUp';
+import PrivateRouter from './Router/PrivateRouter';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/premium/:id',
-        element: <Premium></Premium>,
+        element: <PrivateRouter> <Premium></Premium></PrivateRouter>,
         loader: ({ params }) => {
           return fetch(`http://localhost:5000/premium/${params.id}`)
         }
